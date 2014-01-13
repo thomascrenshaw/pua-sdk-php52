@@ -1,6 +1,6 @@
 ## PHP (>=5.2) SDK for the Pop Up Archive API
 
-This is a core SDK for the Pop Up Archive API.
+This is a the first SDK for the Pop Up Archive API. In an effort to make it as compatible and usable as possible, we limited the functional aspects to those that are available in PHP 5.2. We are working on a more robust SDK that makes use of Composer and other >=5.3 featuers (e.g. proper classes)
 
 ## Usage
 
