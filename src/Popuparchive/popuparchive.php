@@ -344,7 +344,6 @@ class Popuparchive_Services
         }
 
         $url .= (count($params)) ? '?' . http_build_query($params) : '';
-        echo("url is ".$url."<br/>");
         return $url;
     }
 
