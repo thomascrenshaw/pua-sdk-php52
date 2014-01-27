@@ -1,12 +1,48 @@
-<?php
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
 /**
- * Pop Up Archive API SDK written in PHP (>=5.2)
+ * Pop Up Archive API SDK written in PHP (&gt;=5.2)
  *
  * @category  File
  * @package   Popuparchive_Services
- * @author    Thomas Crenshaw <thomascrenshaw@gmail.com>
- * @copyright 2014 Pop Up Archive <info@popuparchive.org>
- * @license   GNU AFFERO GENERAL PUBLIC LICENSE <http://www.gnu.org/licenses/agpl.html>
+ * @author    Thomas Crenshaw &lt;thomascrenshaw@gmail.com&gt;
+ * @copyright 2014 Pop Up Archive &lt;info@popuparchive.org&gt;
+ * @license   GNU AFFERO GENERAL PUBLIC LICENSE &lt;http://www.gnu.org/licenses/agpl.html&gt;
  * @link      http://github.com/popuparchive/pua-api-php52
  */
 require_once 'lib/Exception.php';
@@ -16,9 +52,9 @@ require_once 'lib/Version.php';
  * Pop Up Archive API SDK
  *
  * @category  Services
- * @author    Thomas Crenshaw <thomascrenshaw@gmail.com>
- * @copyright 2014 Pop Up Archive <info@popuparchive.org>
- * @license   GNU AFFERO GENERAL PUBLIC LICENSE <http://www.gnu.org/licenses/agpl.html>
+ * @author    Thomas Crenshaw &lt;thomascrenshaw@gmail.com&gt;
+ * @copyright 2014 Pop Up Archive &lt;info@popuparchive.org&gt;
+ * @license   GNU AFFERO GENERAL PUBLIC LICENSE &lt;http://www.gnu.org/licenses/agpl.html&gt;
  * @link      http://github.com/popuparchive/pua-api-php52
  *
  * PSR1 - https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
@@ -43,9 +79,9 @@ class Popuparchive_Services
      * @static
      */
      private static $_curlDefaultOptions = array(
-         CURLOPT_HEADER => true,
-         CURLOPT_RETURNTRANSFER => true,
-         CURLOPT_USERAGENT => ''
+         CURLOPT_HEADER =&gt; true,
+         CURLOPT_RETURNTRANSFER =&gt; true,
+         CURLOPT_USERAGENT =&gt; ''
      );
 
     /**
@@ -103,8 +139,8 @@ class Popuparchive_Services
      * @static
      */
     private static $_responseFormats = array(
-        '*' => '*/*',
-        'json' => 'application/json'
+        '*' =&gt; '*/*',
+        'json' =&gt; 'application/json'
     );
 
     /**
@@ -126,9 +162,9 @@ class Popuparchive_Services
      */
     public function __construct()
     {
-        $this->_responseFormat = self::$_responseFormats['json'];
-        $this->_curlOptions = self::$_curlDefaultOptions;
-        $this->_curlOptions[CURLOPT_USERAGENT] .= $this->getUserAgent();
+        $this-&gt;_responseFormat = self::$_responseFormats['json'];
+        $this-&gt;_curlOptions = self::$_curlDefaultOptions;
+        $this-&gt;_curlOptions[CURLOPT_USERAGENT] .= $this-&gt;getUserAgent();
     }
 
     /**
@@ -140,7 +176,7 @@ class Popuparchive_Services
      */
     public function getCurlOptions()
     {
-        return $this->_curlOptions;
+        return $this-&gt;_curlOptions;
     }
 
     /**
@@ -154,8 +190,8 @@ class Popuparchive_Services
      */
     public function getHttpHeader($header)
     {
-        if (is_array($this->_lastHttpResponseHeaders)) {
-            return $this->_lastHttpResponseHeaders[$header];
+        if (is_array($this-&gt;_lastHttpResponseHeaders)) {
+            return $this-&gt;_lastHttpResponseHeaders[$header];
         } else {
             return false;
         }
@@ -170,7 +206,7 @@ class Popuparchive_Services
      */
     public function getResponseFormat()
     {
-        return $this->_responseFormat;
+        return $this-&gt;_responseFormat;
     }
 
     /**
@@ -179,17 +215,17 @@ class Popuparchive_Services
      * The method accepts arguments in two ways.
      *
      * You could pass two arguments when adding a single option.
-     * <code>
-     * $popuparchive->setCurlOptions(CURLOPT_SSL_VERIFYHOST, 0);
-     * </code>
+     * &lt;code&gt;
+     * $popuparchive-&gt;setCurlOptions(CURLOPT_SSL_VERIFYHOST, 0);
+     * &lt;/code&gt;
      *
      * You could also pass an associative array when adding multiple options.
-     * <code>
-     * $popuparchive->setCurlOptions(array(
-     *     CURLOPT_SSL_VERIFYHOST => 0,
-     *    CURLOPT_SSL_VERIFYPEER => 0
+     * &lt;code&gt;
+     * $popuparchive-&gt;setCurlOptions(array(
+     *     CURLOPT_SSL_VERIFYHOST =&gt; 0,
+     *    CURLOPT_SSL_VERIFYPEER =&gt; 0
      * ));
-     * </code>
+     * &lt;/code&gt;
      *
      * @return object
      *
@@ -200,10 +236,10 @@ class Popuparchive_Services
         $args = func_get_args();
         $options = (is_array($args[0]))
             ? $args[0]
-            : array($args[0] => $args[1]);
+            : array($args[0] =&gt; $args[1]);
 
-        foreach ($options as $key => $val) {
-            $this->_curlOptions[$key] = $val;
+        foreach ($options as $key =&gt; $val) {
+            $this-&gt;_curlOptions[$key] = $val;
         }
 
         return $this;
@@ -222,7 +258,7 @@ class Popuparchive_Services
     public function setResponseFormat($format)
     {
         if (array_key_exists($format, self::$_responseFormats)) {
-            $this->_responseFormat = self::$_responseFormats[$format];
+            $this-&gt;_responseFormat = self::$_responseFormats[$format];
         } else {
             throw new Popuparchive_Services_Exception_Unsupported_Response_Format();
         }
@@ -244,9 +280,9 @@ class Popuparchive_Services
      */
     public function get($path, $params = array(), $curlOptions = array())
     {
-        $url = $this->buildUrl($path, $params);
+        $url = $this-&gt;buildUrl($path, $params);
 
-        return $this->request($url, $curlOptions);
+        return $this-&gt;request($url, $curlOptions);
     }
 
     /**
@@ -265,12 +301,12 @@ class Popuparchive_Services
      */
     public function getCollectionById($collectionId, $params = array(), $curlOptions = array())
     {
-        $url = $this->buildURL(
+        $url = $this-&gt;buildURL(
             'collections/'.$collectionId,
             $params
         );
 
-        return $this->request($url, $curlOptions);
+        return $this-&gt;request($url, $curlOptions);
     }
 
     /**
@@ -288,12 +324,12 @@ class Popuparchive_Services
      */
     public function getItemById($collectionId, $itemId, $params = array(), $curlOptions = array())
     {
-        $url = $this->buildURL(
+        $url = $this-&gt;buildURL(
             'collections/'.$collectionId.'/items/'.$itemId,
             $params
         );
 
-        return $this->request($url, $curlOptions);
+        return $this-&gt;request($url, $curlOptions);
     }
 
     /**
@@ -301,7 +337,7 @@ class Popuparchive_Services
      *
      * @param string $filterKey   filter type - only filter currently available is 'collection_id'
      * @param string $filterValue filter value
-     * @param array  $params      Optional query string parameters; format -- array('query'=>'chicago OR american','page'=>"1");
+     * @param array  $params      Optional query string parameters; format -- array('query'=&gt;'chicago OR american','page'=&gt;&quot;1&quot;);
      * @param array  $curlOptions Optional cURL options
      *
      * @return mixed
@@ -311,15 +347,16 @@ class Popuparchive_Services
      */
     public function searchByFilter($filterKey, $filterValue, $params = array(), $curlOptions = array())
     {
-        $filterArray = array('filters['.$filterKey.']' => $filterValue);
-        /** @params array|null should contain all query parameters needed for request */
-        $query = array_merge($filterArray, $params);
-        $url = $this->buildURL(
-            'search',
-            $query
-        );
+        if (($filterKey) &amp;&amp; ($filterValue)) {
+            $filterArray = array('filters['.$filterKey.']' =&gt; $filterValue);
+            $query = array_merge($filterArray, $params);
+            $url = $this-&gt;buildURL(
+                'search',
+                $query
+            );
+        }
 
-        return $this->request($url, $curlOptions);
+        return $this-&gt;request($url, $curlOptions);
     }
 
     /**
@@ -338,13 +375,13 @@ class Popuparchive_Services
             $url = $path;
         } else {
             $url = 'https://';
-            $url .= $this->_domain;
+            $url .= $this-&gt;_domain;
             $url .= '/api/';
             $url .= $path;
         }
 
         $url .= (count($params)) ? '?' . http_build_query($params) : '';
-        echo("url is ".$url."<br/>");
+        echo(&quot;url is &quot;.$url.&quot;&lt;br/&gt;&quot;);
         return $url;
     }
 
@@ -359,8 +396,8 @@ class Popuparchive_Services
     {
         $headers = array();
 
-        if ($this->_responseFormat) {
-            array_push($headers, 'Accept: ' . $this->_responseFormat);
+        if ($this-&gt;_responseFormat) {
+            array_push($headers, 'Accept: ' . $this-&gt;_responseFormat);
         }
 
         return $headers;
@@ -389,7 +426,7 @@ class Popuparchive_Services
      */
     protected function parseHttpHeaders($headers)
     {
-        $headers = explode("\n", trim($headers));
+        $headers = explode(&quot;\n&quot;, trim($headers));
         $parsedHeaders = array();
 
         foreach ($headers as $header) {
@@ -436,18 +473,18 @@ class Popuparchive_Services
     protected function request($url, $curlOptions = array())
     {
         $curlinit = curl_init($url);
-        $options = $this->_curlOptions;
+        $options = $this-&gt;_curlOptions;
         $options += $curlOptions;
 
         $includeAccessToken = false;
 
         if (array_key_exists(CURLOPT_HTTPHEADER, $options)) {
             $options[CURLOPT_HTTPHEADER] = array_merge(
-                $this->buildDefaultHeaders(),
+                $this-&gt;buildDefaultHeaders(),
                 $curlOptions[CURLOPT_HTTPHEADER]
             );
         } else {
-            $options[CURLOPT_HTTPHEADER] = $this->buildDefaultHeaders(
+            $options[CURLOPT_HTTPHEADER] = $this-&gt;buildDefaultHeaders(
                 $includeAccessToken
             );
         }
@@ -459,27 +496,36 @@ class Popuparchive_Services
 
         curl_close($curlinit);
 
-        if (array_key_exists(CURLOPT_HEADER, $options) && $options[CURLOPT_HEADER]) {
-            $this->_lastHttpResponseHeaders = $this->parseHttpHeaders(
+        if (array_key_exists(CURLOPT_HEADER, $options) &amp;&amp; $options[CURLOPT_HEADER]) {
+            $this-&gt;_lastHttpResponseHeaders = $this-&gt;parseHttpHeaders(
                 substr($data, 0, $info['header_size'])
             );
-            $this->_lastHttpResponseBody = substr($data, $info['header_size']);
+            $this-&gt;_lastHttpResponseBody = substr($data, $info['header_size']);
         } else {
-            $this->_lastHttpResponseHeaders = array();
-            $this->_lastHttpResponseBody = $data;
+            $this-&gt;_lastHttpResponseHeaders = array();
+            $this-&gt;_lastHttpResponseBody = $data;
         }
 
-        $this->_lastHttpResponseCode = $info['http_code'];
+        $this-&gt;_lastHttpResponseCode = $info['http_code'];
 
-        if ($this->validResponseCode($this->_lastHttpResponseCode)) {
-            return $this->_lastHttpResponseBody;
+        if ($this-&gt;validResponseCode($this-&gt;_lastHttpResponseCode)) {
+            return $this-&gt;_lastHttpResponseBody;
         } else {
             throw new Popuparchive_Services_Exception_Invalid_Http_Response_Code(
                 null,
                 0,
-                $this->_lastHttpResponseBody,
-                $this->_lastHttpResponseCode
+                $this-&gt;_lastHttpResponseBody,
+                $this-&gt;_lastHttpResponseCode
             );
         }
     }
 }
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all();
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

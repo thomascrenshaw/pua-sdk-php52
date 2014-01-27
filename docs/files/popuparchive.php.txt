@@ -311,13 +311,14 @@ class Popuparchive_Services
      */
     public function searchByFilter($filterKey, $filterValue, $params = array(), $curlOptions = array())
     {
-        $filterArray = array('filters['.$filterKey.']' => $filterValue);
-        /** @params array|null should contain all query parameters needed for request */
-        $query = array_merge($filterArray, $params);
-        $url = $this->buildURL(
-            'search',
-            $query
-        );
+        if (($filterKey) && ($filterValue)) {
+            $filterArray = array('filters['.$filterKey.']' => $filterValue);
+            $query = array_merge($filterArray, $params);
+            $url = $this->buildURL(
+                'search',
+                $query
+            );
+        }
 
         return $this->request($url, $curlOptions);
     }
@@ -483,3 +484,4 @@ class Popuparchive_Services
         }
     }
 }
+

@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project title="API Documentation" version="2.2.0&#10;">
+  <partials/>
+  <file path="popuparchive.php" generated-path="popuparchive.html" hash="cc7107abd2b889d420afeab0c4ca1d74" package="Popuparchive_Services">
+    <docblock line="0">
+      <description>Pop Up Archive API SDK written in PHP (&gt;=5.2)</description>
+      <long-description></long-description>
+      <tag name="category" line="0" description="File"/>
+      <tag name="package" line="0" description="Popuparchive_Services"/>
+      <tag name="author" line="0" description="Thomas Crenshaw" link="mailto:thomascrenshaw@gmail.com"/>
+      <tag name="copyright" line="0" description="2014 Pop Up Archive &lt;info@popuparchive.org&gt;"/>
+      <tag name="license" line="0" description="GNU AFFERO GENERAL PUBLIC LICENSE &lt;http://www.gnu.org/licenses/agpl.html&gt;"/>
+      <tag name="link" line="0" description="http://github.com/popuparchive/pua-api-php52" link="http://github.com/popuparchive/pua-api-php52"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="" line="27" package="Popuparchive_Services">
+      <extends/>
+      <name>Popuparchive_Services</name>
+      <full_name>\Popuparchive_Services</full_name>
+      <docblock line="27">
+        <description>Pop Up Archive API SDK</description>
+        <long-description></long-description>
+        <tag name="category" line="27" description="Services"/>
+        <tag name="author" line="27" description="Thomas Crenshaw" link="mailto:thomascrenshaw@gmail.com"/>
+        <tag name="copyright" line="27" description="2014 Pop Up Archive &lt;info@popuparchive.org&gt;"/>
+        <tag name="license" line="27" description="GNU AFFERO GENERAL PUBLIC LICENSE &lt;http://www.gnu.org/licenses/agpl.html&gt;"/>
+        <tag name="link" line="27" description="PSR1 - https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md&#10;PSR2 - https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md" link="http://github.com/popuparchive/pua-api-php52"/>
+      </docblock>
+      <constant namespace="" line="36" package="Popuparchive_Services">
+        <name>CURLOPT_OAUTH_TOKEN</name>
+        <full_name>\Popuparchive_Services::CURLOPT_OAUTH_TOKEN</full_name>
+        <value>1337</value>
+        <docblock line="36">
+          <description>Custom cURL option</description>
+          <long-description></long-description>
+          <tag name="var" line="36" description="" type="integer" variable="">
+            <type>integer</type>
+          </tag>
+          <tag name="access" line="36" description="public"/>
+        </docblock>
+      </constant>
+      <property static="true" visibility="private" line="45" namespace="" package="Popuparchive_Services">
+        <name>$_curlDefaultOptions</name>
+        <default>array(CURLOPT_HEADER =&gt; true, CURLOPT_RETURNTRANSFER =&gt; true, CURLOPT_USERAGENT =&gt; '')</default>
+        <docblock line="45">
+          <description>Default cURL options</description>
+          <long-description></long-description>
+          <tag name="var" line="45" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+          <tag name="access" line="45" description="private"/>
+          <tag name="static" line="45" description=""/>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" line="58" namespace="" package="Popuparchive_Services">
+        <name>$_curlOptions</name>
+        <default></default>
+        <docblock line="58">
+          <description>cURL options</description>
+          <long-description></long-description>
+          <tag name="var" line="58" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+          <tag name="access" line="58" description="private"/>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" line="68" namespace="" package="Popuparchive_Services">
+        <name>$_domain</name>
+        <default>'www.popuparchive.org'</default>
+        <docblock line="68">
+          <description>API domain</description>
+          <long-description></long-description>
+          <tag name="var" line="68" description="" type="string" variable="">
+            <type>string</type>
+          </tag>
+          <tag name="access" line="68" description="private"/>
+          <tag name="static" line="68" description=""/>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" line="77" namespace="" package="Popuparchive_Services">
+        <name>$_lastHttpResponseBody</name>
+        <default></default>
+        <docblock line="77">
+          <description>HTTP response body from the last request</description>
+          <long-description></long-description>
+          <tag name="var" line="77" description="" type="string" variable="">
+            <type>string</type>
+          </tag>
+          <tag name="access" line="77" description="private"/>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" line="86" namespace="" package="Popuparchive_Services">
+        <name>$_lastHttpResponseCode</name>
+        <default></default>
+        <docblock line="86">
+          <description>HTTP response code from the last request</description>
+          <long-description></long-description>
+          <tag name="var" line="86" description="" type="integer" variable="">
+            <type>integer</type>
+          </tag>
+          <tag name="access" line="86" description="private"/>
+        </docblock>
+      </property>
+      <property static="false" visibility="private" line="95" namespace="" package="Popuparchive_Services">
+        <name>$_lastHttpResponseHeaders</name>
+        <default></default>
+        <docblock line="95">
+          <description>HTTP response headers from last request</description>
+          <long-description></long-description>
+          <tag name="var" line="95" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+          <tag name="access" line="95" description="private"/>
+        </docblock>
+      </property>
+      <property static="true" visibility="private" line="105" namespace="" package="Popuparchive_Services">
+        <name>$_responseFormats</name>
+        <default>array('*' =&gt; '*/*', 'json' =&gt; 'application/json')</default>
+        <docblock line="105">
+          <description>Available response formats</description>
+          <long-description></long-description>
+          <tag name="var" line="105" description="" type="array" variable="">
+            <type>array</type>
+          </tag>
+          <tag name="access" line="105" description="private"/>
+          <tag name="static" line="105" description=""/>
+        </docblock>
+      </property>
+      <property static="true" visibility="private" line="118" namespace="" package="Popuparchive_Services">
+        <name>$_userAgent</name>
+        <default>'SDK-PHP52-Popuparchive'</default>
+        <docblock line="118">
+          <description>HTTP user agent</description>
+          <long-description></long-description>
+          <tag name="var" line="118" description="" type="string" variable="">
+            <type>string</type>
+          </tag>
+          <tag name="access" line="118" description="private"/>
+          <tag name="static" line="118" description=""/>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="127" package="Popuparchive_Services">
+        <name>__construct</name>
+        <full_name>\Popuparchive_Services::__construct()</full_name>
+        <docblock line="127">
+          <description>Class constructor</description>
+          <long-description></long-description>
+          <tag name="return" line="127" description="" type="void">
+            <type>void</type>
+          </tag>
+          <tag name="access" line="127" description="public"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="141" package="Popuparchive_Services">
+        <name>getCurlOptions</name>
+        <full_name>\Popuparchive_Services::getCurlOptions()</full_name>
+        <docblock line="141">
+          <description>Get cURL options</description>
+          <long-description></long-description>
+          <tag name="return" line="141" description="" type="mixed">
+            <type>mixed</type>
+          </tag>
+          <tag name="access" line="141" description="public"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="155" package="Popuparchive_Services">
+        <name>getHttpHeader</name>
+        <full_name>\Popuparchive_Services::getHttpHeader()</full_name>
+        <docblock line="155">
+          <description>Get HTTP response header</description>
+          <long-description></long-description>
+          <tag name="param" line="155" description="&lt;p&gt;Name of the header&lt;/p&gt;" type="string" variable="$header">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="155" description="" type="mixed">
+            <type>mixed</type>
+          </tag>
+          <tag name="access" line="155" description="public"/>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$header</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="171" package="Popuparchive_Services">
+        <name>getResponseFormat</name>
+        <full_name>\Popuparchive_Services::getResponseFormat()</full_name>
+        <docblock line="171">
+          <description>Get response format</description>
+          <long-description></long-description>
+          <tag name="return" line="171" description="" type="string">
+            <type>string</type>
+          </tag>
+          <tag name="access" line="171" description="public"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="198" package="Popuparchive_Services">
+        <name>setCurlOptions</name>
+        <full_name>\Popuparchive_Services::setCurlOptions()</full_name>
+        <docblock line="198">
+          <description>Set cURL options</description>
+          <long-description>The method accepts arguments in two ways.
+
+You could pass two arguments when adding a single option.
+&lt;code&gt;
+$popuparchive-&gt;setCurlOptions(CURLOPT_SSL_VERIFYHOST, 0);
+&lt;/code&gt;
+
+You could also pass an associative array when adding multiple options.
+&lt;code&gt;
+$popuparchive-&gt;setCurlOptions(array(
+    CURLOPT_SSL_VERIFYHOST =&gt; 0,
+   CURLOPT_SSL_VERIFYPEER =&gt; 0
+));
+&lt;/code&gt;</long-description>
+          <tag name="return" line="198" description="" type="object">
+            <type>object</type>
+          </tag>
+          <tag name="access" line="198" description="public"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="222" package="Popuparchive_Services">
+        <name>setResponseFormat</name>
+        <full_name>\Popuparchive_Services::setResponseFormat()</full_name>
+        <docblock line="222">
+          <description>Set response format</description>
+          <long-description></long-description>
+          <tag name="param" line="222" description="&lt;p&gt;Response format&lt;/p&gt;" type="string" variable="$format">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="222" description="" type="object">
+            <type>object</type>
+          </tag>
+          <tag name="throws" line="222" description="" type="\Popuparchive_Services_Exception_Unsupported_Response_Format">
+            <type link="Popuparchive_Services_Exception_Unsupported_Response_Format.html">\Popuparchive_Services_Exception_Unsupported_Response_Format</type>
+          </tag>
+          <tag name="access" line="222" description="public"/>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$format</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="245" package="Popuparchive_Services">
+        <name>get</name>
+        <full_name>\Popuparchive_Services::get()</full_name>
+        <docblock line="245">
+          <description>Send a GET HTTP request</description>
+          <long-description></long-description>
+          <tag name="param" line="245" description="&lt;p&gt;Request path&lt;/p&gt;" type="string" variable="$path">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="245" description="&lt;p&gt;Optional query string parameters&lt;/p&gt;" type="array" variable="$params">
+            <type>array</type>
+          </tag>
+          <tag name="param" line="245" description="&lt;p&gt;Optional cURL options&lt;/p&gt;" type="array" variable="$curlOptions">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="245" description="" type="mixed">
+            <type>mixed</type>
+          </tag>
+          <tag name="access" line="245" description="public"/>
+          <tag name="see" line="245" description="" link="\Popuparchive::request()"/>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$path</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$params</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$curlOptions</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="266" package="Popuparchive_Services">
+        <name>getCollectionById</name>
+        <full_name>\Popuparchive_Services::getCollectionById()</full_name>
+        <docblock line="266">
+          <description>Get a Pop Up Archive collectoin by its ID</description>
+          <long-description></long-description>
+          <tag name="param" line="266" description="&lt;p&gt;Request path&lt;/p&gt;" type="string" variable="$collectionId">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="266" description="&lt;p&gt;Optional query string parameters&lt;/p&gt;" type="array" variable="$params">
+            <type>array</type>
+          </tag>
+          <tag name="param" line="266" description="&lt;p&gt;Optional cURL options&lt;/p&gt;" type="array" variable="$curlOptions">
+            <type>array</type>
+          </tag>
+          <tag name="example" line="266" description="example call for getCollectionById"/>
+          <tag name="return" line="266" description="" type="\JSON">
+            <type link="JSON.html">\JSON</type>
+          </tag>
+          <tag name="access" line="266" description="public"/>
+          <tag name="see" line="266" description="" link="\Popuparchive::request()"/>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$collectionId</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$params</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$curlOptions</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="289" package="Popuparchive_Services">
+        <name>getItemById</name>
+        <full_name>\Popuparchive_Services::getItemById()</full_name>
+        <docblock line="289">
+          <description>Get a Pop Up Archive item by its ID and associated Collection ID</description>
+          <long-description></long-description>
+          <tag name="param" line="289" description="&lt;p&gt;Request path&lt;/p&gt;" type="string" variable="$collectionId">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="289" description="&lt;p&gt;Request path&lt;/p&gt;" type="string" variable="$itemId">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="289" description="&lt;p&gt;Optional query string parameters&lt;/p&gt;" type="array" variable="$params">
+            <type>array</type>
+          </tag>
+          <tag name="param" line="289" description="&lt;p&gt;Optional cURL options&lt;/p&gt;" type="array" variable="$curlOptions">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="289" description="" type="mixed">
+            <type>mixed</type>
+          </tag>
+          <tag name="access" line="289" description="public"/>
+          <tag name="see" line="289" description="" link="\Popuparchive::request()"/>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$collectionId</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$itemId</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$params</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$curlOptions</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="312" package="Popuparchive_Services">
+        <name>searchByFilter</name>
+        <full_name>\Popuparchive_Services::searchByFilter()</full_name>
+        <docblock line="312">
+          <description>Search Pop Up Archive, with search set narrowed down by a filter</description>
+          <long-description></long-description>
+          <tag name="param" line="312" description="&lt;p&gt;filter type - only filter currently available is 'collection_id'&lt;/p&gt;" type="string" variable="$filterKey">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="312" description="&lt;p&gt;filter value&lt;/p&gt;" type="string" variable="$filterValue">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="312" description="&lt;p&gt;Optional query string parameters; format -- array('query'=&gt;'chicago OR american','page'=&gt;&quot;1&quot;);&lt;/p&gt;" type="array" variable="$params">
+            <type>array</type>
+          </tag>
+          <tag name="param" line="312" description="&lt;p&gt;Optional cURL options&lt;/p&gt;" type="array" variable="$curlOptions">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="312" description="" type="mixed">
+            <type>mixed</type>
+          </tag>
+          <tag name="access" line="312" description="public"/>
+          <tag name="see" line="312" description="" link="\Popuparchive::request()"/>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$filterKey</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$filterValue</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$params</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$curlOptions</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="" line="336" package="Popuparchive_Services">
+        <name>buildUrl</name>
+        <full_name>\Popuparchive_Services::buildUrl()</full_name>
+        <docblock line="336">
+          <description>Construct a URL</description>
+          <long-description></long-description>
+          <tag name="param" line="336" description="&lt;p&gt;Relative or absolute URI&lt;/p&gt;" type="string" variable="$path">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="336" description="&lt;p&gt;Optional query string parameters&lt;/p&gt;" type="array" variable="$params">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="336" description="$url" type="string">
+            <type>string</type>
+          </tag>
+          <tag name="access" line="336" description="protected"/>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$path</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$params</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="" line="359" package="Popuparchive_Services">
+        <name>buildDefaultHeaders</name>
+        <full_name>\Popuparchive_Services::buildDefaultHeaders()</full_name>
+        <docblock line="359">
+          <description>Construct default HTTP request headers</description>
+          <long-description></long-description>
+          <tag name="return" line="359" description="$headers" type="array">
+            <type>array</type>
+          </tag>
+          <tag name="access" line="359" description="protected"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="" line="377" package="Popuparchive_Services">
+        <name>getUserAgent</name>
+        <full_name>\Popuparchive_Services::getUserAgent()</full_name>
+        <docblock line="377">
+          <description>Get HTTP user agent</description>
+          <long-description></long-description>
+          <tag name="return" line="377" description="" type="string">
+            <type>string</type>
+          </tag>
+          <tag name="access" line="377" description="protected"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="" line="391" package="Popuparchive_Services">
+        <name>parseHttpHeaders</name>
+        <full_name>\Popuparchive_Services::parseHttpHeaders()</full_name>
+        <docblock line="391">
+          <description>Parse HTTP headers</description>
+          <long-description></long-description>
+          <tag name="param" line="391" description="&lt;p&gt;HTTP headers&lt;/p&gt;" type="string" variable="$headers">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="391" description="$parsedHeaders" type="array">
+            <type>array</type>
+          </tag>
+          <tag name="access" line="391" description="protected"/>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$headers</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="" line="420" package="Popuparchive_Services">
+        <name>validResponseCode</name>
+        <full_name>\Popuparchive_Services::validResponseCode()</full_name>
+        <docblock line="420">
+          <description>Validate HTTP response code</description>
+          <long-description></long-description>
+          <tag name="param" line="420" description="&lt;p&gt;HTTP code&lt;/p&gt;" type="integer" variable="$code">
+            <type>integer</type>
+          </tag>
+          <tag name="return" line="420" description="" type="boolean">
+            <type>boolean</type>
+          </tag>
+          <tag name="access" line="420" description="protected"/>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$code</name>
+          <default></default>
+          <type>integer</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="" line="437" package="Popuparchive_Services">
+        <name>request</name>
+        <full_name>\Popuparchive_Services::request()</full_name>
+        <docblock line="437">
+          <description>Performs the actual HTTP request using cURL</description>
+          <long-description></long-description>
+          <tag name="param" line="437" description="&lt;p&gt;Absolute URL to request&lt;/p&gt;" type="string" variable="$url">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="437" description="&lt;p&gt;Optional cURL options&lt;/p&gt;" type="array" variable="$curlOptions">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="437" description="" type="mixed">
+            <type>mixed</type>
+          </tag>
+          <tag name="throws" line="437" description="" type="\Popuparchive_Services_Exception_Invalid_Http_Response_Code">
+            <type link="Popuparchive_Services_Exception_Invalid_Http_Response_Code.html">\Popuparchive_Services_Exception_Invalid_Http_Response_Code</type>
+          </tag>
+          <tag name="uses" line="437" description="to throw error" link="Popuparchive_Services_Exception_Invalid_Http_Response_Code"/>
+          <tag name="access" line="437" description="protected"/>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$url</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$curlOptions</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+      </method>
+    </class>
+    <source>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</source>
+  </file>
+  <package name="Popuparchive_Services" full_name="Popuparchive_Services"/>
+  <namespace name="global" full_name="global"/>
+  <deprecated count="0"/>
+</project>
