@@ -16,7 +16,6 @@ require_once 'lib/Version.php';
  * Pop Up Archive API SDK
  *
  * @category  Services
- * @package   Popuparchive_Services
  * @author    Thomas Crenshaw <thomascrenshaw@gmail.com>
  * @copyright 2014 Pop Up Archive <info@popuparchive.org>
  * @license   GNU AFFERO GENERAL PUBLIC LICENSE <http://www.gnu.org/licenses/agpl.html>
@@ -216,7 +215,7 @@ class Popuparchive_Services
      * @param string $format Response format
      *
      * @return object
-     * @throws Popuparchive_Services_Unsupported_Response_Format_Exception
+     * @throws Popuparchive_Services_Exception_Unsupported_Response_Format
      *
      * @access public
      */
@@ -225,7 +224,7 @@ class Popuparchive_Services
         if (array_key_exists($format, self::$_responseFormats)) {
             $this->_responseFormat = self::$_responseFormats[$format];
         } else {
-            throw new Popuparchive_Services_Unsupported_Response_Format_Exception();
+            throw new Popuparchive_Services_Exception_Unsupported_Response_Format();
         }
 
         return $this;
@@ -298,23 +297,26 @@ class Popuparchive_Services
     }
 
     /**
-     * Search Pop Up Archive by a single facet
+     * Search Pop Up Archive, with search set narrowed down by a filter
      *
-     * @param string $filterKey   filter type (collection_id, interviewer, interviewee)
+     * @param string $filterKey   filter type - only filter currently available is 'collection_id'
      * @param string $filterValue filter value
-     * @param array  $params      Optional query string parameters
+     * @param array  $params      Optional query string parameters; format -- array('query'=>'chicago OR american','page'=>"1");
      * @param array  $curlOptions Optional cURL options
      *
-     * @return JSON
+     * @return mixed
      *
      * @access public
      * @see Popuparchive::request()
      */
     public function searchByFilter($filterKey, $filterValue, $params = array(), $curlOptions = array())
     {
+        $filterArray = array('filters['.$filterKey.']' => $filterValue);
+        /** @params array|null should contain all query parameters needed for request */
+        $query = array_merge($filterArray, $params);
         $url = $this->buildURL(
-            'search/?filters['.$filterKey.']='.$filterValue,
-            $params
+            'search',
+            $query
         );
 
         return $this->request($url, $curlOptions);
@@ -342,7 +344,6 @@ class Popuparchive_Services
         }
 
         $url .= (count($params)) ? '?' . http_build_query($params) : '';
-        //echo('url is '.$url.'<br/>');
         return $url;
     }
 
@@ -426,7 +427,8 @@ class Popuparchive_Services
      * @param array  $curlOptions Optional cURL options
      *
      * @return mixed
-     * @throws Popuparchive_Services_Invalid_Http_Response_Code_Exception
+     * @throws Popuparchive_Services_Exception_Invalid_Http_Response_Code
+     * @uses Popuparchive_Services_Exception_Invalid_Http_Response_Code to throw error
      *
      * @access protected
      */
@@ -471,7 +473,7 @@ class Popuparchive_Services
         if ($this->validResponseCode($this->_lastHttpResponseCode)) {
             return $this->_lastHttpResponseBody;
         } else {
-            throw new Popuparchive_Services_Invalid_Http_Response_Code_Exception(
+            throw new Popuparchive_Services_Exception_Invalid_Http_Response_Code(
                 null,
                 0,
                 $this->_lastHttpResponseBody,

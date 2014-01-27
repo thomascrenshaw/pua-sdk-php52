@@ -3,7 +3,6 @@
  * Version.php contains the Popuparchive Services Version class
  *
  * @category  File
- * @package   Popuparchive_Services
  * @author    Thomas Crenshaw <thomascrenshaw@gmail.com>
  * @copyright 2014 Pop Up Archive <info@popuparchive.org>
  * @license   GNU AFFERO GENERAL PUBLIC LICENSE <http://www.gnu.org/licenses/agpl.html>
@@ -14,7 +13,7 @@
  * Popuparchive package version
  *
  * @category  Services
- * @package   Popuparchive_Services
+ * @package   Popuparchive_Services\Version
  * @author    Thomas Crenshaw <thomascrenshaw@gmail.com>
  * @copyright 2014 Pop Up Archive <info@popuparchive.org>
  * @license   GNU AFFERO GENERAL PUBLIC LICENSE <http://www.gnu.org/licenses/agpl.html>
