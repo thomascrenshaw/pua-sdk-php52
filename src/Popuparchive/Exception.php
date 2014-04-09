@@ -3,7 +3,7 @@
  * Exception.php contains the exception classes for the for the Pop Up Archive SDK (PHP >=5.2)
  *
  * @category  File
- * @package   Popuparchive_Services
+ * @package   Popuparchive_Services\Exception
  * @author    Thomas Crenshaw <thomascrenshaw@gmail.com>
  * @copyright 2014 Pop Up Archive <info@popuparchive.org>
  * @license   GNU AFFERO GENERAL PUBLIC LICENSE <http://www.gnu.org/licenses/agpl.html>
@@ -14,13 +14,12 @@
  * Invalid HTTP response code exception class
  *
  * @category  Services
- * @package   Popuparchive_Services
  * @author    Thomas Crenshaw <thomascrenshaw@gmail.com>
  * @copyright 2014 Pop Up Archive <info@popuparchive.org>
  * @license   GNU AFFERO GENERAL PUBLIC LICENSE <http://www.gnu.org/licenses/agpl.html>
  * @link      http://github.com/popuparchive/pua-api-php52
  */
-class Popuparchive_Services_Invalid_Http_Response_Code_Exception extends Exception
+class Popuparchive_Services_Exception_Invalid_Http_Response_Code extends Exception
 {
     /**
      * HTTP response body.
@@ -59,7 +58,7 @@ class Popuparchive_Services_Invalid_Http_Response_Code_Exception extends Excepti
      *
      * @return void
      */
-    function __construct($message = null, $code = 0, $httpBody = null, $httpCode = 0)
+    public function __construct($message = null, $code = 0, $httpBody = null, $httpCode = 0)
     {
         $this->httpBody = $httpBody;
         $this->httpCode = $httpCode;
@@ -98,13 +97,12 @@ class Popuparchive_Services_Invalid_Http_Response_Code_Exception extends Excepti
  * Popuparchive unsupported response format exception.
  *
  * @category  Services
- * @package   Popuparchive_Services
  * @author    Thomas Crenshaw <thomascrenshaw@gmail.com>
  * @copyright 2014 Pop Up Archive <info@popuparchive.org>
  * @license   GNU AFFERO GENERAL PUBLIC LICENSE <http://www.gnu.org/licenses/agpl.html>
  * @link      http://github.com/popuparchive/pua-api-php52
  */
-class Popuparchive_Services_Unsupported_Response_Format_Exception extends Exception
+class Popuparchive_Services_Exception_Unsupported_Response_Format extends Exception
 {
     /**
      * Default message.
@@ -114,28 +112,5 @@ class Popuparchive_Services_Unsupported_Response_Format_Exception extends Except
      * @var string
      */
     protected $message = 'The given response format is unsupported.';
-
-}
-
-/**
- * Popuparchive unsupported audio format exception.
- *
- * @category  Services
- * @package   Popuparchive_Services
- * @author    Thomas Crenshaw <thomascrenshaw@gmail.com>
- * @copyright 2014 Pop Up Archive <info@popuparchive.org>
- * @license   GNU AFFERO GENERAL PUBLIC LICENSE <http://www.gnu.org/licenses/agpl.html>
- * @link      http://github.com/popuparchive/pua-api-php52
- */
-class Popuparchive_Services_Unsupported_Audio_Format_Exception extends Exception
-{
-    /**
-     * Default message.
-     *
-     * @access protected
-     *
-     * @var string
-     */
-    protected $message = 'The given audio format is unsupported.';
 
 }
